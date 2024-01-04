@@ -1,17 +1,22 @@
+import streamlit as st
 from langchain.agents import AgentType, initialize_agent
 from langchain.chains.conversation.memory import ConversationBufferWindowMemory
 from llm import llm
 from langchain.tools import Tool
-import streamlit as st
-
 from tools.vector import kg_qa
+from tools.cypher import cypher_qa
 
 tools = [
     Tool.from_function(
         name="Vector Search Index",  # (1)
         description="Provides information about movie plots using Vector Search",  # (2)
         func=kg_qa,  # (3)
-    )
+    ),
+    Tool.from_function(
+        name="Graph Cypher QA Chain",  # (1)
+        description="Provides information about Movies including their Actors, Directors and User reviews",  # (2)
+        func=cypher_qa,  # (3)
+    ),
 ]
 
 memory = ConversationBufferWindowMemory(
