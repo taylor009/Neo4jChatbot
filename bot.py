@@ -11,12 +11,14 @@ if "messages" not in st.session_state:
         {"role": "assistant", "content": "Hi, I'm the GraphAcademy Chatbot!  How can I help you?"},
     ]
 
+
 # Submit handler
 def handle_submit(message):
     # Handle the response
     with st.spinner('Thinking...'):
         response = generate_response(message)
         write_message('assistant', response)
+
 
 # Handle any user input
 if prompt := st.chat_input("What is up?"):
